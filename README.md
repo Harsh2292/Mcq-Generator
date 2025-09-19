@@ -111,27 +111,6 @@ Default model: `gpt-3.5-turbo` (configurable in `mcqgenerator.py`).
 
 ---
 
-## Architecture
-
-```mermaid
-flowchart TD
-    U[User] -->|Upload PDF/TXT, set params| S[StreamlitApp.py UI]
-    S -->|read_file| UTL[utils.read_file]
-    UTL -->|extracted text| S
-    S -->|prompt vars + Response.json| G[generate_evaluate_chain]
-    G -->|Quiz JSON| S
-    G -->|Review text| S
-    S -->|parse| T[utils.get_table_data]
-    T -->|table data (DataFrame)| S
-    S -->|Table + Review| UI[Rendered UI]
-
-    subgraph LLM
-      G --- OAI[OpenAI ChatOpenAI (gpt-3.5-turbo)]
-    end
-```
-
----
-
 ## Configuration Tips
 - Model: change `model="gpt-3.5-turbo"` in `mcqgenerator.py` to use a different OpenAI model.
 - Temperature: adjust `temperature=0.5` to control creativity.
